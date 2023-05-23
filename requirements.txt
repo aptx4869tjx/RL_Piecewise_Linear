@@ -1,0 +1,9 @@
+gym==0.23.1
+matplotlib==3.5.2
+numpy==1.18.5
+pyparsing==3.0.9
+PyYAML==6.0
+Rtree==1.0.0
+scipy==1.7.3
+tensorboardX==2.5.1
+torch==1.11.0

@@ -1,0 +1,25 @@
+{
+  "name": "b3_sys",
+  "state_vars": [
+    "x1",
+    "x2"
+  ],
+  "dynamics": [
+    "(-x1) * (0.1 + (x1 + x2) * (x1 + x2))",
+    "(a + x1) * (0.1 + (x1 + x2) * (x1 + x2))"
+  ],
+  "control_step": 0.1,
+  "fixed_step": 0.02,
+  "plot": "matlab",
+  "max_control_depth": 25,
+  "init": [
+    [
+      0.8,
+      0.9
+    ],
+    [
+      0.4,
+      0.5
+    ]
+  ]
+}
