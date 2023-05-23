@@ -1,37 +1,53 @@
-# BBReach
-This is the code repository for BBReach: Tight and Scalable Black-Box Reachability Analysis of Deep Reinforcement Learning Systems.
+This is the code repository for **Boosting Verification of Deep Reinforcement Learning via Piece-wise Linear Decision Neural Networks**.
+------------
+We provide the Flow* models evaluated in our experiments. See the following directory:
+```
+cd models/
+```
+
+Then one can analyze these models through Flow*. The Installation of Flow* can be found in <https://github.com/chenxin415/flowstar>.
+The commands for analyzing these models is:
+```
+./flowstar < modelfile
+```
 
 ------------
 ## Installation
+If one want to train PLDNNs and output the corresponding models, it requires the installation of our python project.
 ```
-conda create -n BBReach python=3.7
+conda create -n pldnn python=3.7
 
-conda activate BBReach
+conda activate pldnn
 
 pip install -r requirements.txt
 ```
 ------------
-## Running
+## Training PLDNNs and output Flow* model
 run either:
 ```
-cd verify/b1/
-python multi_b1.py
+cd abstract/b1/
+python b1_abs.py
 
-cd verify/b2/
-python multi_b2.py
+cd abstract/b2/
+python b2_abs.py
 
-cd verify/b3/
-python multi_b3.py
+cd abstract/b3/
+python b3_abs.py
 
-cd verify/b4/
-python multi_b4.py
+cd abstract/b4/
+python b4_abs.py
 
-cd verify/b5/
-python multi_b5.py
+cd abstract/b5/
+python b5_abs.py
 
-cd verify/tora/
-python multi_tora.py
+cd abstract/tora/
+python tora_abs.py
 
-cd verify/acc6/
-python multi_acc6.py
+cd abstract/cartpole/
+python cartpole_abs.py
+
+cd abstract/quad/
+python quad_abs.py
 ```
+
+
