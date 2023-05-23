@@ -1,4 +1,5 @@
-This is the code repository for **Boosting Verification of Deep Reinforcement Learning via Piece-wise Linear Decision Neural Networks**.
+## This is the code repository for **Boosting Verification of Deep Reinforcement Learning via Piece-wise Linear Decision Neural Networks**.
+
 ------------
 We provide the Flow* models evaluated in our experiments. See the following directory:
 ```
