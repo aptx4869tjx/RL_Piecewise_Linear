@@ -1,0 +1,58 @@
+hybrid reachability
+{
+state var x1, x2, a, clock
+setting
+{
+fixed steps 0.1
+time 150
+remainder estimation 1e-3
+identity precondition
+matlab octagon x1,x2
+fixed orders 3
+cutoff 1e-10
+precision 100
+output b2_example
+max jumps 1
+print on
+}
+modes
+{
+b2_sys
+{
+nonpoly ode
+{
+x1' = x2-x1*x1*x1
+x2' = a
+a' = 0.0
+clock' = 1.0
+}
+inv
+{
+clock <= 0.1
+}
+}
+}
+jumps
+{
+b2_sys -> b2_sys
+guard
+{
+clock = 0.1  -2.5 - x1 <= 0  x1 <= 2.5  -2.5 - x2 <= 0  x2 <= 2.5  }
+reset
+{
+a' := 0.5
+clock' := 0.0
+}
+interval aggregation
+}
+init
+{
+b2_sys
+{
+x1 in [0.15, 0.2]
+x2 in [0.2, 0.3]
+a in [0, 0]
+clock in [0.1, 0.1]
+}
+}
+}

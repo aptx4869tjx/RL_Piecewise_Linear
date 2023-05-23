@@ -1,0 +1,88 @@
+hybrid reachability
+{
+state var x1, x2, a, clock
+setting
+{
+fixed steps 0.01
+time 150
+remainder estimation 1e-6
+identity precondition
+matlab octagon x1,x2
+adaptive orders { min 3, max 8 }
+cutoff 1e-17
+precision 100
+output b2_relu_2_20
+max jumps 10
+print on
+}
+modes
+{
+b2_sys
+{
+nonpoly ode
+{
+x1' = x2-x1*x1*x1
+x2' = a
+a' = 0.0
+clock' = 1.0
+}
+inv
+{
+clock <= 0.2
+}
+}
+}
+jumps
+{
+b2_sys -> b2_sys
+guard
+{
+clock = 0.2  -2.5 - x1 <= 0  x1 <= 0.0  -2.5 - x2 <= 0  x2 <= 0.0  }
+reset
+{
+a' := -0.092125766 + -1.195508 * x1 + -1.3010683 * x2
+clock' := 0.0
+}
+interval aggregation
+b2_sys -> b2_sys
+guard
+{
+clock = 0.2  -2.5 - x1 <= 0  x1 <= 0.0  0.0 - x2 <= 0  x2 <= 2.5  }
+reset
+{
+a' := -0.24815713 + -1.2487831 * x1 + -1.3109603 * x2
+clock' := 0.0
+}
+interval aggregation
+b2_sys -> b2_sys
+guard
+{
+clock = 0.2  0.0 - x1 <= 0  x1 <= 2.5  -2.5 - x2 <= 0  x2 <= 0.0  }
+reset
+{
+a' := -0.06959076 + -1.252104 * x1 + -1.3579241 * x2
+clock' := 0.0
+}
+interval aggregation
+b2_sys -> b2_sys
+guard
+{
+clock = 0.2  0.0 - x1 <= 0  x1 <= 2.5  0.0 - x2 <= 0  x2 <= 2.5  }
+reset
+{
+a' := -0.37897417 + -1.4144156 * x1 + -1.4361187 * x2
+clock' := 0.0
+}
+interval aggregation
+}
+init
+{
+b2_sys
+{
+x1 in [0.7, 0.9]
+x2 in [0.7, 0.9]
+a in [0, 0]
+clock in [0.2, 0.2]
+}
+}
+}

@@ -1,0 +1,88 @@
+hybrid reachability
+{
+state var x1, x2, a, clock
+setting
+{
+fixed steps 0.02
+time 150
+remainder estimation 1e-6
+identity precondition
+matlab octagon x1,x2
+adaptive orders { min 3, max 8 }
+cutoff 1e-17
+precision 100
+output b3_relu_2_20
+max jumps 27
+print on
+}
+modes
+{
+b3_sys
+{
+nonpoly ode
+{
+x1' = (-x1) * (0.1 + (x1 + x2) * (x1 + x2))
+x2' = (a + x1) * (0.1 + (x1 + x2) * (x1 + x2))
+a' = 0.0
+clock' = 1.0
+}
+inv
+{
+clock <= 0.1
+}
+}
+}
+jumps
+{
+b3_sys -> b3_sys
+guard
+{
+clock = 0.1  -2.5 - x1 <= 0  x1 <= 0.0  -2.5 - x2 <= 0  x2 <= 0.0  }
+reset
+{
+a' := -0.75071394 + -0.2981206 * x1 + -0.29590806 * x2
+clock' := 0.0
+}
+interval aggregation
+b3_sys -> b3_sys
+guard
+{
+clock = 0.1  -2.5 - x1 <= 0  x1 <= 0.0  0.0 - x2 <= 0  x2 <= 2.5  }
+reset
+{
+a' := -0.7507209 + -0.29812038 * x1 + -0.29590747 * x2
+clock' := 0.0
+}
+interval aggregation
+b3_sys -> b3_sys
+guard
+{
+clock = 0.1  0.0 - x1 <= 0  x1 <= 2.5  -2.5 - x2 <= 0  x2 <= 0.0  }
+reset
+{
+a' := -0.75049454 + -0.29811683 * x1 + -0.29590347 * x2
+clock' := 0.0
+}
+interval aggregation
+b3_sys -> b3_sys
+guard
+{
+clock = 0.1  0.0 - x1 <= 0  x1 <= 2.5  0.0 - x2 <= 0  x2 <= 2.5  }
+reset
+{
+a' := -0.75049454 + -0.29811683 * x1 + -0.29590347 * x2
+clock' := 0.0
+}
+interval aggregation
+}
+init
+{
+b3_sys
+{
+x1 in [0.8, 0.9]
+x2 in [0.4, 0.5]
+a in [0, 0]
+clock in [0.1, 0.1]
+}
+}
+}

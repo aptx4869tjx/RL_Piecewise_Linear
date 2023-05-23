@@ -1,0 +1,214 @@
+hybrid reachability
+{
+state var x1, x2, x3, x4, gt, a, clock
+setting
+{
+fixed steps 0.001
+time 150
+remainder estimation 1e-6
+identity precondition
+gnuplot octagon gt,x3
+adaptive orders { min 3, max 8 }
+cutoff 1e-20
+precision 200
+output cart2
+max jumps 50
+print on
+}
+modes
+{
+cartpole_sys
+{
+nonpoly ode
+{
+x1' = x2
+x2' = ((a+0.05*x4*x4*sin(x3))/1.1) - (0.05 * ((9.8*sin(x3)-cos(x3)*((a+0.05*x4*x4*sin(x3))/1.1))/(0.5*(4.0/3.0-(0.1*cos(x3)*cos(x3)/1.1))))*cos(x3))/1.1
+x3' = x4
+x4' = (9.8*sin(x3)-cos(x3)*((a+0.05*x4*x4*sin(x3))/1.1))/(0.5*(4.0/3.0-(0.1*cos(x3)*cos(x3)/1.1)))
+gt' = 1
+a' = 0.0
+clock' = 1.0
+}
+inv
+{
+clock <= 0.02
+}
+}
+}
+jumps
+{
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  -5.0 - x1 <= 0  x1 <= 0.0  -10.0 - x2 <= 0  x2 <= 0.0  -0.5 - x3 <= 0  x3 <= 0.0  -10.0 - x4 <= 0  x4 <= 0.0  }
+reset
+{
+a' := -0.98236454 + 1.9891999 * x1 + 1.0 * x2 + 10.0 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  -5.0 - x1 <= 0  x1 <= 0.0  -10.0 - x2 <= 0  x2 <= 0.0  -0.5 - x3 <= 0  x3 <= 0.0  0.0 - x4 <= 0  x4 <= 10.0  }
+reset
+{
+a' := -0.8576158 + -2.0 * x1 + 0.99999994 * x2 + 9.999998 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  -5.0 - x1 <= 0  x1 <= 0.0  -10.0 - x2 <= 0  x2 <= 0.0  0.0 - x3 <= 0  x3 <= 0.5  -10.0 - x4 <= 0  x4 <= 0.0  }
+reset
+{
+a' := -0.9990196 + 0.95180076 * x1 + 1.0 * x2 + 10.0 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  -5.0 - x1 <= 0  x1 <= 0.0  -10.0 - x2 <= 0  x2 <= 0.0  0.0 - x3 <= 0  x3 <= 0.5  0.0 - x4 <= 0  x4 <= 10.0  }
+reset
+{
+a' := 0.99631774 + -1.9999996 * x1 + 1.0 * x2 + 10.0 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  -5.0 - x1 <= 0  x1 <= 0.0  0.0 - x2 <= 0  x2 <= 10.0  -0.5 - x3 <= 0  x3 <= 0.0  -10.0 - x4 <= 0  x4 <= 0.0  }
+reset
+{
+a' := -0.99555707 + 1.9921931 * x1 + -0.99988794 * x2 + 10.0 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  -5.0 - x1 <= 0  x1 <= 0.0  0.0 - x2 <= 0  x2 <= 10.0  -0.5 - x3 <= 0  x3 <= 0.0  0.0 - x4 <= 0  x4 <= 10.0  }
+reset
+{
+a' := 0.99945563 + 1.7835606 * x1 + 0.9999669 * x2 + 9.999999 * x3 + 0.99999964 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  -5.0 - x1 <= 0  x1 <= 0.0  0.0 - x2 <= 0  x2 <= 10.0  0.0 - x3 <= 0  x3 <= 0.5  -10.0 - x4 <= 0  x4 <= 0.0  }
+reset
+{
+a' := 0.9999202 + 1.9888732 * x1 + -0.9890144 * x2 + 9.999999 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  -5.0 - x1 <= 0  x1 <= 0.0  0.0 - x2 <= 0  x2 <= 10.0  0.0 - x3 <= 0  x3 <= 0.5  0.0 - x4 <= 0  x4 <= 10.0  }
+reset
+{
+a' := 0.998071 + -1.9902713 * x1 + 0.989965 * x2 + 9.999963 * x3 + 0.9999999 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  0.0 - x1 <= 0  x1 <= 5.0  -10.0 - x2 <= 0  x2 <= 0.0  -0.5 - x3 <= 0  x3 <= 0.0  -10.0 - x4 <= 0  x4 <= 0.0  }
+reset
+{
+a' := -0.99017644 + -1.8477944 * x1 + 0.99993765 * x2 + 9.999978 * x3 + 0.9999994 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  0.0 - x1 <= 0  x1 <= 5.0  -10.0 - x2 <= 0  x2 <= 0.0  -0.5 - x3 <= 0  x3 <= 0.0  0.0 - x4 <= 0  x4 <= 10.0  }
+reset
+{
+a' := 0.9999738 + -1.1736722 * x1 + 0.9975865 * x2 + 9.999195 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  0.0 - x1 <= 0  x1 <= 5.0  -10.0 - x2 <= 0  x2 <= 0.0  0.0 - x3 <= 0  x3 <= 0.5  -10.0 - x4 <= 0  x4 <= 0.0  }
+reset
+{
+a' := -0.9826411 + -1.6468388 * x1 + 0.9999942 * x2 + 9.999998 * x3 + 0.9999999 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  0.0 - x1 <= 0  x1 <= 5.0  -10.0 - x2 <= 0  x2 <= 0.0  0.0 - x3 <= 0  x3 <= 0.5  0.0 - x4 <= 0  x4 <= 10.0  }
+reset
+{
+a' := 0.99997467 + -1.0005649 * x1 + 0.9969981 * x2 + 9.998962 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  0.0 - x1 <= 0  x1 <= 5.0  0.0 - x2 <= 0  x2 <= 10.0  -0.5 - x3 <= 0  x3 <= 0.0  -10.0 - x4 <= 0  x4 <= 0.0  }
+reset
+{
+a' := -0.99746615 + 1.9894922 * x1 + -0.99997467 * x2 + 10.0 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  0.0 - x1 <= 0  x1 <= 5.0  0.0 - x2 <= 0  x2 <= 10.0  -0.5 - x3 <= 0  x3 <= 0.0  0.0 - x4 <= 0  x4 <= 10.0  }
+reset
+{
+a' := 0.9995019 + 1.7690856 * x1 + 0.9999647 * x2 + 9.999998 * x3 + 0.99999964 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  0.0 - x1 <= 0  x1 <= 5.0  0.0 - x2 <= 0  x2 <= 10.0  0.0 - x3 <= 0  x3 <= 0.5  -10.0 - x4 <= 0  x4 <= 0.0  }
+reset
+{
+a' := 0.96015686 + 1.9967248 * x1 + -0.57768476 * x2 + 10.0 * x3 + 1.0 * x4
+clock' := 0.0
+}
+interval aggregation
+cartpole_sys -> cartpole_sys
+guard
+{
+clock = 0.02  0.0 - x1 <= 0  x1 <= 5.0  0.0 - x2 <= 0  x2 <= 10.0  0.0 - x3 <= 0  x3 <= 0.5  0.0 - x4 <= 0  x4 <= 10.0  }
+reset
+{
+a' := 0.9995038 + 1.7686704 * x1 + 0.9999652 * x2 + 9.999998 * x3 + 0.99999964 * x4
+clock' := 0.0
+}
+interval aggregation
+}
+init
+{
+cartpole_sys
+{
+x1 in [0.02, 0.02]
+x2 in [0.02, 0.02]
+x3 in [0.02, 0.021]
+x4 in [0.02, 0.02]
+gt in [0, 0]
+a in [0, 0]
+clock in [0.02, 0.02]
+}
+}
+}

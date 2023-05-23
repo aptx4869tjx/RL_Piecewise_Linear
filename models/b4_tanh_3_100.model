@@ -1,0 +1,130 @@
+hybrid reachability
+{
+state var x1, x2, x3, a, clock
+setting
+{
+fixed steps 0.005
+time 150
+remainder estimation 1e-6
+identity precondition
+gnuplot octagon x1,x2
+adaptive orders { min 3, max 8 }
+cutoff 1e-17
+precision 100
+output b4_tanh_3_100
+max jumps 7
+print on
+}
+modes
+{
+b4_sys
+{
+nonpoly ode
+{
+x1' = (-x1 + x2 - x3)
+x2' = (-x1 * (x3 + 1) - x2)
+x3' = (-x1 + a)
+a' = 0.0
+clock' = 1.0
+}
+inv
+{
+clock <= 0.1
+}
+}
+}
+jumps
+{
+b4_sys -> b4_sys
+guard
+{
+clock = 0.1  -2.5 - x1 <= 0  x1 <= 0.0  -2.5 - x2 <= 0  x2 <= 0.0  -2.5 - x3 <= 0  x3 <= 0.0  }
+reset
+{
+a' := 0.0010265596 + 0.00059027935 * x1 + 0.0005812384 * x2 + 0.0007240947 * x3
+clock' := 0.0
+}
+interval aggregation
+b4_sys -> b4_sys
+guard
+{
+clock = 0.1  -2.5 - x1 <= 0  x1 <= 0.0  -2.5 - x2 <= 0  x2 <= 0.0  0.0 - x3 <= 0  x3 <= 2.5  }
+reset
+{
+a' := 0.001127105 + 0.00057588296 * x1 + 0.0005956957 * x2 + 0.0006906127 * x3
+clock' := 0.0
+}
+interval aggregation
+b4_sys -> b4_sys
+guard
+{
+clock = 0.1  -2.5 - x1 <= 0  x1 <= 0.0  0.0 - x2 <= 0  x2 <= 2.5  -2.5 - x3 <= 0  x3 <= 0.0  }
+reset
+{
+a' := 0.0010276773 + 0.0006570746 * x1 + 0.00065226003 * x2 + 0.0007449262 * x3
+clock' := 0.0
+}
+interval aggregation
+b4_sys -> b4_sys
+guard
+{
+clock = 0.1  -2.5 - x1 <= 0  x1 <= 0.0  0.0 - x2 <= 0  x2 <= 2.5  0.0 - x3 <= 0  x3 <= 2.5  }
+reset
+{
+a' := 0.0011283262 + 0.0006426911 * x1 + 0.00066679035 * x2 + 0.00071145 * x3
+clock' := 0.0
+}
+interval aggregation
+b4_sys -> b4_sys
+guard
+{
+clock = 0.1  0.0 - x1 <= 0  x1 <= 2.5  -2.5 - x2 <= 0  x2 <= 0.0  -2.5 - x3 <= 0  x3 <= 0.0  }
+reset
+{
+a' := 0.0012507946 + 0.0006468657 * x1 + 0.0006162934 * x2 + 0.00079164596 * x3
+clock' := 0.0
+}
+interval aggregation
+b4_sys -> b4_sys
+guard
+{
+clock = 0.1  0.0 - x1 <= 0  x1 <= 2.5  -2.5 - x2 <= 0  x2 <= 0.0  0.0 - x3 <= 0  x3 <= 2.5  }
+reset
+{
+a' := 0.0013515429 + 0.0006324915 * x1 + 0.0006306678 * x2 + 0.0007583172 * x3
+clock' := 0.0
+}
+interval aggregation
+b4_sys -> b4_sys
+guard
+{
+clock = 0.1  0.0 - x1 <= 0  x1 <= 2.5  0.0 - x2 <= 0  x2 <= 2.5  -2.5 - x3 <= 0  x3 <= 0.0  }
+reset
+{
+a' := 0.0012519984 + 0.0007137334 * x1 + 0.0006871433 * x2 + 0.00081263704 * x3
+clock' := 0.0
+}
+interval aggregation
+b4_sys -> b4_sys
+guard
+{
+clock = 0.1  0.0 - x1 <= 0  x1 <= 2.5  0.0 - x2 <= 0  x2 <= 2.5  0.0 - x3 <= 0  x3 <= 2.5  }
+reset
+{
+a' := 0.0013527122 + 0.0006994385 * x1 + 0.0007016076 * x2 + 0.0007792365 * x3
+clock' := 0.0
+}
+interval aggregation
+}
+init
+{
+b4_sys
+{
+x1 in [0.25, 0.27]
+x2 in [0.08, 0.1]
+x3 in [0.25, 0.27]
+a in [0, 0]
+clock in [0.1, 0.1]
+}
+}
+}
