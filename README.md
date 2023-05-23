@@ -1,6 +1,8 @@
 ## This is the code repository for **Boosting Verification of Deep Reinforcement Learning via Piece-wise Linear Decision Neural Networks**.
 
 ------------
+**Neurips_2023_Report.pdf** is our technical report.
+
 We provide the Flow* models evaluated in our experiments. See the following directory:
 ```
 cd models/
